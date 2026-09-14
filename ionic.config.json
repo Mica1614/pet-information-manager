@@ -1,0 +1,7 @@
+{
+  "name": "pet-info",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
