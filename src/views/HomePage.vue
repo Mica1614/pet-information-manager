@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header class="ion-no-border">
       <ion-toolbar class="luxury-toolbar">
-        <ion-title class="app-title">Pet-Info</ion-title>
+        <ion-title class="app-title">Pet Information Manager</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -17,7 +17,9 @@
         <ion-card-content>
           <!-- Pet Name -->
           <ion-item class="custom-item" lines="none">
-            <ion-input v-model="newPet.name" label="Pet Name" label-placement="stacked" placeholder="Enter pet name"></ion-input>
+            <ion-input v-model="newPet.name" placeholder="Enter pet name">
+              <div slot="label" class="bold-label">Pet Name</div>
+            </ion-input>
           </ion-item>
 
           <!-- Direct Image File Upload -->
@@ -36,10 +38,11 @@
 
           <!-- Animal Type Select -->
           <ion-item class="custom-item" lines="none">
-            <ion-select v-model="newPet.type" label="Animal Type" label-placement="stacked" placeholder="Select animal type" @ionChange="onTypeChange">
+            <ion-select v-model="newPet.type" placeholder="Select animal type" @ionChange="onTypeChange">
+              <div slot="label" class="bold-label">Animal Type</div>
               <ion-select-option value="Dog">🐶 Dog</ion-select-option>
               <ion-select-option value="Cat">🐱 Cat</ion-select-option>
-              <ion-select-option value="Bird">🐦 Bird</ion-select-option>
+              <ion-select-option value="Bird">🕊️ Bird</ion-select-option>
               <ion-select-option value="Rabbit">🐰 Rabbit</ion-select-option>
               <ion-select-option value="Hamster">🐹 Hamster</ion-select-option>
               <ion-select-option value="Other"> Other Animal</ion-select-option>
@@ -48,12 +51,15 @@
 
           <!-- Custom Animal Type Input -->
           <ion-item v-if="newPet.type === 'Other'" class="custom-item custom-fade-in" lines="none">
-            <ion-input v-model="newPet.customType" label="Specify Animal Type" label-placement="stacked" placeholder="Enter custom animal type"></ion-input>
+            <ion-input v-model="newPet.customType" placeholder="Enter custom animal type">
+              <div slot="label" class="bold-label">Specify Animal Type</div>
+            </ion-input>
           </ion-item>
 
           <!-- Breed Select -->
           <ion-item class="custom-item" lines="none">
-            <ion-select v-model="newPet.breed" label="Breed" label-placement="stacked" placeholder="Select breed" @ionChange="onBreedChange">
+            <ion-select v-model="newPet.breed" placeholder="Select breed" @ionChange="onBreedChange">
+              <div slot="label" class="bold-label">Breed</div>
               <ion-select-option v-for="breed in availableBreeds" :key="breed" :value="breed">
                 {{ breed }}
               </ion-select-option>
@@ -62,31 +68,42 @@
 
           <!-- Custom Breed Input -->
           <ion-item v-if="newPet.breed === 'Other'" class="custom-item custom-fade-in" lines="none">
-            <ion-input v-model="newPet.customBreed" label="Specify Breed" label-placement="stacked" placeholder="Enter custom breed"></ion-input>
+            <ion-input v-model="newPet.customBreed" placeholder="Enter custom breed">
+              <div slot="label" class="bold-label">Specify Breed</div>
+            </ion-input>
           </ion-item>
 
           <!-- Birthday (Interactive Calendar Picker) -->
           <ion-item class="custom-item calendar-item" lines="none">
-            <ion-input type="date" v-model="newPet.birthday" label="Pet Birthday (Click to open calendar)" label-placement="stacked" class="calendar-input"></ion-input>
+            <ion-input type="date" v-model="newPet.birthday" class="calendar-input">
+              <div slot="label" class="bold-label">Pet Birthday (Click to open calendar)</div>
+            </ion-input>
           </ion-item>
 
           <!-- Age (Years and Months) -->
           <div class="age-container">
             <ion-item class="custom-item half-width" lines="none">
-              <ion-input type="number" v-model="newPet.ageYears" label="Age (Years)" label-placement="stacked" placeholder="Years"></ion-input>
+              <ion-input type="number" v-model="newPet.ageYears" placeholder="Years">
+                <div slot="label" class="bold-label">Age (Years)</div>
+              </ion-input>
             </ion-item>
             <ion-item class="custom-item half-width" lines="none">
-              <ion-input type="number" v-model="newPet.ageMonths" label="Age (Months)" label-placement="stacked" placeholder="Months"></ion-input>
+              <ion-input type="number" v-model="newPet.ageMonths" placeholder="Months">
+                <div slot="label" class="bold-label">Age (Months)</div>
+              </ion-input>
             </ion-item>
           </div>
 
           <!-- Weight & Unit -->
           <div class="age-container">
             <ion-item class="custom-item weight-input" lines="none">
-              <ion-input type="number" step="0.1" v-model="newPet.weight" label="Weight" label-placement="stacked" placeholder="e.g. 5.2"></ion-input>
+              <ion-input type="number" step="0.1" v-model="newPet.weight" placeholder="e.g. 5.2">
+                <div slot="label" class="bold-label">Weight</div>
+              </ion-input>
             </ion-item>
             <ion-item class="custom-item weight-unit" lines="none">
-              <ion-select v-model="newPet.weightUnit" label="Unit" label-placement="stacked">
+              <ion-select v-model="newPet.weightUnit">
+                <div slot="label" class="bold-label">Unit</div>
                 <ion-select-option value="kg">kg</ion-select-option>
                 <ion-select-option value="lbs">lbs</ion-select-option>
               </ion-select>
@@ -95,12 +112,16 @@
 
           <!-- Owner Name -->
           <ion-item class="custom-item" lines="none">
-            <ion-input v-model="newPet.owner" label="Owner Name" label-placement="stacked" placeholder="Enter owner's full name"></ion-input>
+            <ion-input v-model="newPet.owner" placeholder="Enter owner's full name">
+              <div slot="label" class="bold-label">Owner Name</div>
+            </ion-input>
           </ion-item>
 
           <!-- Notes -->
           <ion-item class="custom-item" lines="none">
-            <ion-textarea v-model="newPet.notes" label="Medical Notes / Temperament" label-placement="stacked" placeholder="Enter medical history, vaccination, etc."></ion-textarea>
+            <ion-textarea v-model="newPet.notes" placeholder="Enter medical history, vaccination, etc.">
+              <div slot="label" class="bold-label">Medical Notes / Temperament</div>
+            </ion-textarea>
           </ion-item>
 
           <!-- Save / Update Buttons -->
@@ -117,7 +138,7 @@
       <!-- Pet List Section -->
       <div class="list-section">
         <div class="list-header-row">
-          <h2 class="section-heading">📋 Directory</h2>
+          <h2 class="section-heading"> Directory</h2>
           <span class="count-badge">{{ filteredPets.length }} Pets</span>
         </div>
 
@@ -154,7 +175,7 @@
                 <p><strong>Breed:</strong> {{ pet.breed === 'Other' ? pet.customBreed : (pet.breed || 'N/A') }}</p>
                 <p v-if="pet.birthday"><strong>Birthday:</strong> 📅 {{ pet.birthday }}</p>
                 <p><strong>Age:</strong> {{ pet.ageYears || 0 }} year(s) {{ pet.ageMonths || 0 }} month(s)</p>
-                <p v-if="pet.weight"><strong>Weight:</strong> ⚖️ {{ pet.weight }} {{ pet.weightUnit || 'kg' }}</p>
+                <p v-if="pet.weight"><strong>Weight:</strong>  {{ pet.weight }} {{ pet.weightUnit || 'kg' }}</p>
                 <p><strong>Owner:</strong> {{ pet.owner }}</p>
                 <p class="pet-notes" v-if="pet.notes"><strong>Notes:</strong> {{ pet.notes }}</p>
               </div>
@@ -399,6 +420,12 @@ onMounted(() => {
   box-shadow: 0 0 0 4px rgba(114, 9, 183, 0.15);
 }
 
+.bold-label {
+  font-weight: 800 !important;
+  color: #4D067B !important;
+  font-size: 0.95rem;
+}
+
 .file-upload-item {
   padding: 12px 16px;
   background: #FAF5FF;
@@ -412,8 +439,8 @@ onMounted(() => {
 }
 
 .file-label {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 800;
   color: #4D067B;
 }
 
