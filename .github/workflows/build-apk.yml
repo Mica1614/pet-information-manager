@@ -18,6 +18,7 @@ jobs:
 
       - name: Install dependencies and build web app
         run: |
+          cd pet-info
           npm install
           npm run build
 
@@ -29,7 +30,7 @@ jobs:
 
       - name: Build Android Debug APK
         run: |
-          cd android
+          cd pet-info/android
           chmod +x gradlew
           ./gradlew assembleDebug
 
@@ -37,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: pet-info/android/app/build/outputs/apk/debug/app-debug.apk
